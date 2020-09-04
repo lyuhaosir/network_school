@@ -50,19 +50,31 @@ export default {
             .then(res => {
               // console.log(res);
               if(res.data.code==200){
-                
-                localStorage.setItem('netword_token',res.data.data.token)
+                // console.log(res)
+                const req = res.data.data
 
-                loginApi.userInfo().then(res=>{
-                  if(res.data.code==200){
-                    localStorage.setItem('netword_info',res.data.data)
-                    this.$router.push('/')
-                  }else{
-                    this.$message.warning('登录失败')
-                  }
-                    
+                const name = req.username;
+                const pass = req.password;
+                if(this.ruleForm.username == name && this.ruleForm.password == pass ){
+                  
+                  // console.log(res.data.data.token)
+                  localStorage.setItem('netword_token',res.data.data.token)
 
-                })
+                  loginApi.userInfo().then(res=>{
+                    if(res.data.code==200){
+                      console.log(res.data.data)
+                      localStorage.setItem('netword_info',res.data.data)
+                      this.$router.push('/')
+                    }else{
+                      this.$message.warning('登录失败')
+                    }
+
+                  })
+                }else{
+                  console.log(2)
+                  this.$message.warning('账号或密码错误，请重新输入')
+                }
+
               }else{
                 this.$message.warning('登录失败')
               }

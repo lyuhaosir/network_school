@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-      首页
+      <el-button type="primary" @click="login_out()">退出登录</el-button>
   </div>
 </template>
 
@@ -11,6 +11,13 @@ data() {
 return {
 
 }
+},
+methods:{
+  login_out(){
+    localStorage.removeItem('netword_token')
+    localStorage.removeItem('netword_info')
+    this.$router.push('/login')
+  }
 },
 //生命周期 - 创建完成（访问当前this实例）
 created() {
