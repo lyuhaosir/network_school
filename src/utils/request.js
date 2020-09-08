@@ -7,6 +7,9 @@ const Server = axios.create({
 
 
 Server.interceptors.request.use(config => {
+    const token = localStorage.getItem('netword_token') ? localStorage.getItem('netword_token') : "";
+    //发送token
+    config.headers.Authorization = token;
     // Do something before request is sent
     return config;
 }, error => {

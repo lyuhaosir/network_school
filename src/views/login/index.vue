@@ -63,7 +63,7 @@ export default {
                   loginApi.userInfo().then(res=>{
                     if(res.data.code==200){
                       console.log(res.data.data)
-                      localStorage.setItem('netword_info',res.data.data)
+                      localStorage.setItem('netword_info',JSON.stringify(res.data.data))
                       this.$router.push('/')
                     }else{
                       this.$message.warning('登录失败')

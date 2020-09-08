@@ -3,6 +3,10 @@ import VueRouter from "vue-router";
 import login from "@/views/login";
 import layout from "@/components/layout.vue"
 
+import user from './user'
+
+import teach from './teach'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,7 +18,12 @@ const routes = [
   {
     path:'/',
     name:'layout',
-    component:layout
+    component:layout,
+    redirect:'/user',
+    children:[
+      ...user,
+      ...teach
+    ]
   }
   // {
   //   path: "/",
@@ -30,7 +39,7 @@ const routes = [
   //   component: () =>
   //     import(/* webpackChunkName: "about" */ "../views/About.vue")
   // }
-];
+]
 
 const router = new VueRouter({
   routes
